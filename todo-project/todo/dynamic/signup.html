@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>signup</title>
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+  </head>
+
+  <body>
+      <div class="signup-box">
+        <form  method="post">
+            {% csrf_token %}
+            <div class="heading">
+                <h2 >Welcome to the activities</h2>
+            </div>
+            <div class="style">
+                <div class="field">
+                    <b>USERNAME</b>
+                    <input type="text" class="inp" required placeholder="Enter username" name="fnm">
+                </div>
+                <div class="field">
+                    <b>EMAIL</b>
+                    <input type="email" class="inp" required placeholder="enter email" name="email">
+                </div>
+                <div class="field">
+                    <b>PASSWORD</b>
+                    <input type="password" class="inp" required placeholder="enter password" name="pwd">
+                </div>
+                <div class="field">
+                    <input type="submit" class="submit-button" value="signup">
+                </div>
+            </div>
+        </form>
+        <div class="field">
+            <b><a href="/login" class="anc">Already have account?</a></b>
+        </div>
+      </div>
+  </body>
+</html>

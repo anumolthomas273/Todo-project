@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>To‑Do List</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <script src="{% static 'js/signup.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background: #f2f2f2;
+        }
+        .logout {
+            float: right;
+            color: red;
+            font-size: 20px;
+            text-decoration: none;
+        }
+        .heading-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<div class="signup-box">
+
+    <!-- Heading with username and logout -->
+    <div class="heading-bar">
+        <h2>Hello, {{ request.user.username }}</h2>
+        <a href="{% url 'signout' %}" class="logout" title="Sign out">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </a>
+    </div>
+
+    <!-- Add task form -->
+    <form method="post">
+        {% csrf_token %}
+        <div class="style">
+            <div class="field">
+                <input type="text" class="inp" required placeholder="Enter Title" name="title">
+            </div>
+            <div class="field">
+                <input type="submit" class="submit-button" value="Add Task">
+            </div>
+        </div>
+    </form>
+
+    <!-- Tasks Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Sr No</th>
+                <th>Title</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for todo in res %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ todo.title }}</td>
+                <td><a href="{% url 'edit_todo' todo.srno %}"><i class="fa-regular fa-pen-to-square"></i></a></td>
+                <td><a href="{% url 'delete_todo' todo.srno %}"><i class="fa-solid fa-trash"></i></a></td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4">No tasks yet.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
